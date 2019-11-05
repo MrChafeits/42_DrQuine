@@ -7,3 +7,4 @@ additional arguments are passed on the stack. Integer return values up to 64 bit
 in size are stored in RAX while values up to 128 bit are stored in RAX and RDX.
 Floating-point return values are similarly stored in XMM0 and XMM1. The wider
 YMM and ZMM registers are used for passing and returning wider values in place of XMM when they exist
+https://wiki.cdot.senecacollege.ca/wiki/X86_64_Register_and_Instruction_Quick_Start

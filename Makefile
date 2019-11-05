@@ -1,6 +1,15 @@
 AS = nasm
+ASFLAGS = -fmacho64
 
-ASFLAGS = -f macho64
+BASENAMES = Colleen Grace Sully
+
+ASMOUT = $(addprefix asm/, $(BASENAMES))
+ASMSRCS = $(addsuffix .s, $(ASMOUT))
+ASMOBJS = $(ASMSRCS:.s=.o)
+
+COUT = $(addprefix c/, $(BASENAMES))
+CSRCS = $(addsuffix .c, $(COUT))
+COBJS = $(CSRCS:.c=.o)
 
 CCFLAGS =
 INCLUDES =
@@ -13,21 +22,22 @@ endif
 
 CFLAGS = $(CCFLAGS) $(INCLUDES)
 
-.PHONY: Colleen
-Colleen:
-	$(CC) $(CFLAGS) -o $@ $@.c
-	./$@ > tmpout
-	diff $@.c tmpout
-	$(RM) tmpout $@
-	$(AS) $(ASFLAGS) $@.s
-	$(CC) $(CFLAGS) -Wl,-no_pie -o $@ $@.o
-	./$@ > tmpout
-	diff $@.s tmpout
-	$(RM) tmpout $@.o $@
+all: c asm
 
-.PHONY: Grace
-Grace:
-	$(CC) $(CFLAGS) -o $@ $@.c
-	./$@
-	diff $@.c $@_kid.c
-	$(RM) $@_kid.c
+c: $(COBJS) $(COUT)
+
+.PHONY: ctest
+ctest:
+	./c/test.sh
+
+asm: $(ASMOBJS) $(ASMOUT)
+
+.PHONY: asmtest
+asmtest:
+	./asm/test.sh
+
+.PHONY: clean
+clean:
+	$(RM) $(ASMOBJS) $(COBJS) $(ASMOUT) $(COUT)
+	$(RM) -r *.dSYM
+	-find . -type f -name 'Grace_kid.*' -delete -o -name 'Sully_[0-4].*' -delete
