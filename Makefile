@@ -24,20 +24,22 @@ CFLAGS = $(CCFLAGS) $(INCLUDES)
 
 all: c asm
 
+test: ctest asmtest
+
 c: $(COBJS) $(COUT)
 
 .PHONY: ctest
-ctest:
-	./c/test.sh
+ctest: c
+	cd c; ./test.sh; cd - >/dev/null
 
 asm: $(ASMOBJS) $(ASMOUT)
 
 .PHONY: asmtest
-asmtest:
-	./asm/test.sh
+asmtest: asm
+	cd asm; ./test.sh; cd - >/dev/null
 
 .PHONY: clean
 clean:
-	$(RM) $(ASMOBJS) $(COBJS) $(ASMOUT) $(COUT) a.out
+	$(RM) $(ASMOBJS) $(COBJS) $(ASMOUT) $(COUT) a.out c/a.out asm/a.out
 	$(RM) -r *.dSYM
 	-find . -type f -name 'Grace_kid.*' -delete -o -name 'Sully_[0-4].*' -delete
