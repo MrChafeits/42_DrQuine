@@ -38,6 +38,6 @@ asmtest:
 
 .PHONY: clean
 clean:
-	$(RM) $(ASMOBJS) $(COBJS) $(ASMOUT) $(COUT)
+	$(RM) $(ASMOBJS) $(COBJS) $(ASMOUT) $(COUT) a.out
 	$(RM) -r *.dSYM
 	-find . -type f -name 'Grace_kid.*' -delete -o -name 'Sully_[0-4].*' -delete
