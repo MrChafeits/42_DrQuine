@@ -24,7 +24,7 @@ CFLAGS = $(CCFLAGS) $(INCLUDES)
 
 all: c asm
 
-test: ctest asmtest
+test: ctest asmtest pytest
 
 c: $(COBJS) $(COUT)
 
@@ -37,6 +37,10 @@ asm: $(ASMOBJS) $(ASMOUT)
 .PHONY: asmtest
 asmtest: asm
 	cd asm; ./test.sh; cd - >/dev/null
+
+.PHONY: pytest
+pytest:
+	cd python; ./test.sh; cd - >/dev/null
 
 .PHONY: clean
 clean:
