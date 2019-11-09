@@ -4,5 +4,5 @@ diff Colleen.c <(./Colleen)
 ./Sully
 for i in {4..0}; do
     cmp -b Sully.c "Sully_${i}.c"
-    cc "Sully_${i}.c" && ./a.out
+    make "Sully_${i}" && ./"Sully_${i}"
 done

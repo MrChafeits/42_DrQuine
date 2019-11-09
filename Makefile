@@ -56,4 +56,4 @@ gotest:
 .PHONY: clean fclean nuke
 clean fclean nuke:
 	$(RM) $(ASMOBJS) $(COBJS) $(ASMOUT) $(COUT) c/a.out asm/a.out error.c out.c
-	-find . -type f -name 'Grace_kid.*' -delete -o -name 'Sully_[0-4].*' -delete
+	-find . -type f -name 'Grace_kid.*' -delete -o -name 'Sully_[0-4]*' -delete
